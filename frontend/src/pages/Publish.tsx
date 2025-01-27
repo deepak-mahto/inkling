@@ -1,7 +1,7 @@
 import { Appbar } from "../components/Appbar";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import { Spinner } from "../components/Spinner";
 
@@ -9,6 +9,8 @@ export const Publish = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
+  const [searchParams] = useSearchParams();
+  const name = searchParams.get("name");
   const navigate = useNavigate();
 
   const handlePublish = async () => {
@@ -31,7 +33,7 @@ export const Publish = () => {
           },
         }
       );
-      navigate(`/blog/${response.data.blogId}`);
+      navigate(`/blog/${response.data.blogId}?name=${name}`);
     } catch (error) {
       alert("Failed to publish the blog. Please try again.");
     } finally {
@@ -41,7 +43,7 @@ export const Publish = () => {
 
   return (
     <div>
-      <Appbar />
+      <Appbar name={name as string} />
       <div className="flex justify-center w-full pt-8">
         <div className="max-w-screen-lg w-full px-4">
           <input

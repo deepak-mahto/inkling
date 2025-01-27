@@ -1,10 +1,11 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { signupInput } from "@deepak-mahto/inkling-common";
 
 export const Auth = ({ type }: { type: "signup" | "signin" }) => {
+  const name = useRef();
   const navigate = useNavigate();
   const [postInputs, setPostInputs] = useState<signupInput>({
     name: "",
@@ -19,8 +20,9 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
         postInputs
       );
       const jwt = response.data.token;
+      name.current = response.data.name.split(" ")[0];
       localStorage.setItem("token", jwt);
-      navigate("/blogs");
+      navigate(`/blogs?name=${name.current}`);
     } catch (e) {
       alert("Error while signing up");
     }
