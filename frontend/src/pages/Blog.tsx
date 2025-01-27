@@ -1,6 +1,6 @@
 import { Appbar } from "../components/Appbar";
 import { FullBlog } from "../components/FullBlog";
-import { Spinner } from "../components/Spinner";
+import { FullBlogSkeleton } from "../components/FullBlogSkeleton"; // Import the skeleton component
 import { useBlog } from "../hooks";
 import { useParams, useSearchParams } from "react-router-dom";
 
@@ -16,11 +16,7 @@ export const Blog = () => {
     return (
       <div>
         <Appbar name={name as string} />
-        <div className="h-screen flex flex-col justify-center">
-          <div className="flex justify-center">
-            <Spinner />
-          </div>
-        </div>
+        <FullBlogSkeleton />
       </div>
     );
   }
