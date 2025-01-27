@@ -39,6 +39,7 @@ userRouter.post("/signup", async (c) => {
 
     return c.json({
       token: token,
+      name: user.name,
     });
   } catch (error) {
     c.status(411);
@@ -76,10 +77,12 @@ userRouter.post("/signin", async (c) => {
         error: "User not found",
       });
     }
+
     const token = await sign({ id: user.id }, c.env.JWT_SECRET);
 
     return c.json({
       token: token,
+      name: user.name,
     });
   } catch (error) {
     c.status(411);
