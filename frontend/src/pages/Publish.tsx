@@ -14,6 +14,7 @@ export const Publish = () => {
   const navigate = useNavigate();
 
   const handlePublish = async () => {
+    const publishedDate = new Date().toISOString();
     if (!title.trim() || !content.trim()) {
       alert("Title and content cannot be empty!");
       return;
@@ -26,6 +27,7 @@ export const Publish = () => {
         {
           title,
           content,
+          publishedDate,
         },
         {
           headers: {

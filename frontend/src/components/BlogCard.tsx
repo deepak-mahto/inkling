@@ -27,7 +27,11 @@ export const BlogCard = ({
             <Circle />
           </div>
           <div className="pl-2 font-thin text-slate-500 text-sm">
-            {publishedDate}
+            {new Date(publishedDate).toLocaleDateString("en-Us", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
           </div>
         </div>
         <div className="text-xl font-semibold pt-2">{title}</div>
